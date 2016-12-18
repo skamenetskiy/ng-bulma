@@ -1,5 +1,6 @@
 # ng-bulma
 [![Build Status](https://travis-ci.org/skamenetskiy/ng-bulma.svg?branch=master)](https://travis-ci.org/skamenetskiy/ng-bulma)
+[![npm](https://img.shields.io/npm/v/ng-bulma.svg)](https://www.npmjs.com/package/ng-bulma)
 
 ## Installation
 ng-bulma can be installed using popular package managers or using CDN
