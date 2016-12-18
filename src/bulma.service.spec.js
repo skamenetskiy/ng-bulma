@@ -14,8 +14,33 @@ describe('bulma.service', function () {
             expect(bulma.modal).toBeDefined();
         }));
 
+        it('should throw an error if there is not template', inject(function (bulma) {
+            expect(function () {
+                bulma.modal({})
+            }).toThrowError();
+        }));
+
+        it('should throw an error if there is not templateUrl', inject(function (bulma) {
+            expect(function () {
+                bulma.modal({})
+            }).toThrowError();
+        }));
+
+        it('should not throw an error if there is not template', inject(function (bulma) {
+            expect(function () {
+                bulma.modal({controller: 'controller', template: 'template'})
+            }).not.toThrowError();
+        }));
+
+        it('should not throw an error if there is not templateUrl', inject(function (bulma) {
+            expect(function () {
+                bulma.modal({controller: 'controller', templateUrl: 'templateUrl'})
+            }).not.toThrowError()
+        }));
+
         it('should return an instance of BulmaModal', inject(function (bulma, BulmaModal) {
-            expect(bulma.modal() instanceof BulmaModal).toBeTruthy();
+            console.log(BulmaModal);
+            expect(bulma.modal({controller: 'controller', template: 'template'}) instanceof BulmaModal).toBeTruthy();
         }));
 
     });
