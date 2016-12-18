@@ -35,4 +35,3 @@ bower install --save ng-bulma
 ```
 
 ## Documentation
-### bulma module

@@ -21,6 +21,17 @@ module.exports = (grunt) => {
                         dest: 'dist/bulma.js'
                     }
                 ]
+            },
+            docs_md: {
+                files: [
+                    {
+                        src:  [
+                            'header.md',
+                            'src/**/*.md'
+                        ],
+                        dest: 'README.md'
+                    }
+                ]
             }
         },
         uglify:      {
@@ -91,7 +102,8 @@ module.exports = (grunt) => {
 
     grunt.registerTask('docs', [
         'copy:docs_js',
-        'copy:docs_css'
+        'copy:docs_css',
+        'concat:docs_md'
     ]);
 
     function ngTemplatesWrapper(module, script) {
