@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/skamenetskiy/bulma.git"
+    "url": "git+ssh://git@github.com/skamenetskiy/ng-bulma.git"
   },
   "keywords": [
     "angular",
@@ -17,7 +17,7 @@
   "author": "Simon Kamenetskiy",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/skamenetskiy/bulma/issues"
+    "url": "https://github.com/skamenetskiy/ng-bulma/issues"
   },
   "homepage": "https://github.com/skamenetskiy/bulma#readme",
   "devDependencies": {
