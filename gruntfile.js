@@ -2,7 +2,7 @@ module.exports = (grunt) => {
 
     grunt.initConfig({
         concat:      {
-            dist: {
+            dist:    {
                 options: {
                     banner:  `(function(angular){"use strict";\n`,
                     footer:  `})(angular);`,
@@ -95,6 +95,11 @@ module.exports = (grunt) => {
     grunt.loadNpmTasks('grunt-angular-templates');
 
     grunt.registerTask('default', [
+        'build',
+        'docs'
+    ]);
+
+    grunt.registerTask('build', [
         'concat:dist',
         'ngtemplates:dist',
         'uglify:dist'

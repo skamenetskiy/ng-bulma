@@ -7,4 +7,4 @@ install:
   - npm install -g karma
   - npm install
   - bower install
-script: grunt && karma start
+script: grunt build && karma start

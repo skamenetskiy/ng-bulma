@@ -59,7 +59,7 @@
                             options.template = template;
                             resolve(modal);
                         })
-                        .catch(reject)
+                        .catch(reject);
                 }
             });
         }
