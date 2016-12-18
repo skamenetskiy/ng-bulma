@@ -7,6 +7,7 @@
         .config(config)
         .run(run)
         .controller('modalsController', modalsController)
+        .controller('progressController', progressController)
         .controller('sampleController', sampleController);
 
     /**
@@ -39,7 +40,7 @@
             modal = bulma
                 .modal({
                     templateUrl:  'modal1.html',
-                    controller:   'sampleController',
+                    controller:   'sampleModalsController',
                     controllerAs: 'vm'
                 })
                 .then(function (modal) {
@@ -50,9 +51,9 @@
 
     }
 
-    sampleController.$inject = ['$scope', '$timeout', 'bulmaModal'];
+    sampleModalsController.$inject = ['$scope', '$timeout', 'bulmaModal'];
 
-    function sampleController($scope, $timeout, bulmaModal) {
+    function sampleModalsController($scope, $timeout, bulmaModal) {
         var vm   = this;
         vm.hello = 123;
 
@@ -65,6 +66,16 @@
             $timeout(function () {
                 bulmaModal.destroy();
             }, 3000);
+        }, 3000);
+    }
+
+    progressController.$inject = ['$timeout'];
+
+    function progressController($timeout) {
+        var vm   = this;
+        vm.value = 30;
+        $timeout(function () {
+            vm.value = 70;
         }, 3000);
     }
 

@@ -4,7 +4,8 @@
 
 angular
         .module('bulma', [
-            'bulma.modal'
+            'bulma.modal',
+            'bulma.progress'
         ]);
 
 })();
@@ -13,6 +14,13 @@ angular
 
 angular
         .module('bulma.modal', []);
+
+})();
+// Source: src/progress/progress.module.js
+(function () {
+
+angular
+        .module('bulma.progress', []);
 
 })();
 // Source: src/bulma.component.js
@@ -309,6 +317,50 @@ angular
     }
 
 
+})();
+// Source: src/progress/progress.component.js
+(function () {
+
+angular
+        .module('bulma.progress')
+        .component('bulmaProgress', {
+            bindings:    {
+                value: '=',
+                max:   '=',
+                size:  '@',
+                color: '@'
+            },
+            templateUrl: 'src/progress/progress.html',
+            controller:  'bulmaProgressController as vm'
+        });
+
+})();
+// Source: src/progress/progress.controller.js
+(function () {
+
+angular
+        .module('bulma.progress')
+        .controller('bulmaProgressController', bulmaProgressController);
+
+    bulmaProgressController.$inject = [];
+
+    function bulmaProgressController() {
+        var vm     = this;
+        vm.classes = {
+            // Colors
+            'is-primary': vm.color == 'primary',
+            'is-info':    vm.color == 'info',
+            'is-success': vm.color == 'success',
+            'is-warning': vm.color == 'warning',
+            'is-danger':  vm.color == 'danger',
+
+            // Sizes
+            'is-small':  vm.size == 'small',
+            'is-medium': vm.size == 'medium',
+            'is-large':  vm.size == 'large'
+        };
+    }
+
 })();})(angular);
 (function () {
 
@@ -330,6 +382,11 @@ angular
 
   $templateCache.put('src/modal/modal.html',
     "<div class=\"modal\" ng-class=\"vm.classes\"></div>"
+  );
+
+
+  $templateCache.put('src/progress/progress.html',
+    "<progress class=\"progress\" ng-class=\"vm.classes\" value=\"{{vm.value}}\" max=\"{{vm.max}}\">{{vm.value}}%</progress>"
   );
 
     }

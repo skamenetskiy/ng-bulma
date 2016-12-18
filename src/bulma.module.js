@@ -4,7 +4,8 @@
 
     angular
         .module('bulma', [
-            'bulma.modal'
+            'bulma.modal',
+            'bulma.progress'
         ]);
 
 })();

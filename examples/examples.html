@@ -7,20 +7,25 @@
           type="text/css"
           href="../bower_components/bulma/css/bulma.css">
     <style>
-        body {
-            padding-top: 20px;
+        .box {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 <div ng-app="app">
-    <div class="container"
-         ng-controller="modalsController">
+    <div class="container">
         <a name="modal"></a>
-        <div class="box">
+        <div class="box"
+             ng-controller="modalsController">
             <button class="button is-primary"
                     ng-click="openModal()">Open Modal dialog
             </button>
+        </div>
+        <a name="modal"></a>
+        <div class="box"
+             ng-controller="progressController as vm">
+            <bulma-progress max="100" color="danger" value="vm.value"></bulma-progress>
         </div>
     </div>
     <bulma></bulma>
