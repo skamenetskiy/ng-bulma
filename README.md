@@ -37,7 +37,7 @@ bower install --save ng-bulma
 ## Documentation
 ### bulma module
 ```javascript
-angular.module('bulma`, [])
+angular.module('bulma', [])
 ```
 
 bulma is the main module which includes the ```<bulma/>``` component and the following dependencies:
