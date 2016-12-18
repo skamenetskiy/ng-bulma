@@ -1,0 +1,28 @@
+{
+  "name": "ng-bulma",
+  "description": "AngularJs wrapper for bulma",
+  "main": "bulma.component.js",
+  "authors": [
+    "Simon Kamenetskiy"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "bulma"
+  ],
+  "homepage": "https://github.com/skamenetskiy/bulma",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.8"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.5.8",
+    "bulma": "^0.2.3"
+  }
+}

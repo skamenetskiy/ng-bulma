@@ -1,1 +1,1 @@
-# bulma
+# ng-bulma
