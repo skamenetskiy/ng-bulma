@@ -1,10 +1,8 @@
 language: node_js
 node_js:
-  - "6"
+  - "6.1"
 install:
-  - npm install -g grunt
-  - npm install -g bower
-  - npm install -g karma
+  - npm install -g grunt bower karma
   - npm install
   - bower install
 script: grunt build && karma start
