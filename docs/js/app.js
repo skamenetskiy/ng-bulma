@@ -8,7 +8,7 @@
         .run(run)
         .controller('modalsController', modalsController)
         .controller('progressController', progressController)
-        .controller('sampleController', sampleController);
+        .controller('sampleModalsController', sampleModalsController);
 
     /**
      * App config
@@ -58,7 +58,7 @@
         vm.hello = 123;
 
         $scope.$on('$destroy', function () {
-            console.log('destroy sampleController');
+            console.log('destroy sampleModalsController');
         });
 
         $timeout(function () {
