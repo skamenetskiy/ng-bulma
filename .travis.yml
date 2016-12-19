@@ -1,9 +1,8 @@
-dist: trusty
 language: node_js
 node_js:
   - "6.1"
 install:
-  - npm install -g grunt bower karma
+  - npm install -g grunt bower
   - npm install
   - bower install
-script: grunt build && karma start
+script: grunt build && ./node_modules/.bin/karma start
