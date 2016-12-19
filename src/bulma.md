@@ -18,12 +18,12 @@ The ```bulma``` service is accessible through the `bulma` argument
 
 ##### bulma.modal(options) : promise(BulmaModal)
 
-*options.template*:_string_ - represents the template string
+**options.template**:_string_ - represents the template string
 
-*options.templateUrl*:string - represents the url to load the template from
+**options.templateUrl**:string - represents the url to load the template from
 
-*options.controller*:string|function|[string,function] - represents the modal controller
+**options.controller**:string|function|[string,function] - represents the modal controller
 
-*options.controllerAs*:string - represents the controllerAs definition for the modals' controller
+**options.controllerAs**:string - represents the controllerAs definition for the modals' controller
 
-*options.classes*:object - will be passed to modals' ngClass
+**options.classes**:object - will be passed to modals' ngClass
