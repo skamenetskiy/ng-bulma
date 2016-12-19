@@ -5,7 +5,8 @@
 angular
         .module('bulma', [
             'bulma.modal',
-            'bulma.progress'
+            'bulma.progress',
+            'bulma.tabs'
         ]);
 
 })();
@@ -21,6 +22,20 @@ angular
 
 angular
         .module('bulma.progress', []);
+
+})();
+// Source: src/tabs/tab/tab.module.js
+(function () {
+
+angular
+        .module('bulma.tabs.tab', []);
+
+})();
+// Source: src/tabs/tabs.module.js
+(function () {
+
+angular
+        .module('bulma.tabs', []);
 
 })();
 // Source: src/bulma.component.js
@@ -361,6 +376,103 @@ angular
         };
     }
 
+})();
+// Source: src/tabs/tab/tab.component.js
+(function () {
+
+angular
+        .module('bulma.tabs.tab')
+        .component('bulmaTab', {
+            templateUrl: 'src/tabs/tab/tab.html',
+            controller:  'bulmaTabsTabController as vm',
+            transclude:  true,
+            bindings:    {
+                title: '@'
+            },
+            require:  {
+                tabsCtrl: '^bulmaTabs'
+            }
+        });
+
+})();
+// Source: src/tabs/tab/tab.controller.js
+(function () {
+
+angular
+        .module('bulma.tabs.tab')
+        .controller('bulmaTabsTabController', bulmaTabsTabController);
+
+    bulmaTabsTabController.$inject = [];
+
+    /**
+     * bulmaTabsTabController
+     */
+    function bulmaTabsTabController() {
+        var vm     = this;
+        vm.$onInit = onInit;
+
+        /**
+         * Initialize
+         */
+        function onInit() {
+            vm.tabsCtrl.add(this);
+        }
+    }
+
+})();
+// Source: src/tabs/tabs.component.js
+(function () {
+
+angular
+        .module('bulma.tabs')
+        .component('bulmaTabs', {
+            templateUrl: 'src/tabs/tabs.html',
+            controller:  'bulmaTabsController as vm',
+            transclude:  true
+        });
+
+})();
+// Source: src/tabs/tabs.controller.js
+(function () {
+
+angular
+        .module('bulma.tabs')
+        .controller('bulmaTabsController', bulmaTabsController);
+
+    bulmaTabsController.$inject = [];
+
+    /**
+     * bulmaTabsController
+     */
+    function bulmaTabsController() {
+        var vm    = this;
+        vm.tabs   = [];
+        vm.select = select;
+        vm.add    = add;
+
+        /**
+         * Mark a tab as selected
+         * @param tab
+         */
+        function select(tab) {
+            angular.forEach(vm.tabs, function (tab) {
+                tab.selected = false;
+            });
+            tab.selected = true;
+        }
+
+        /**
+         * Add a tab
+         * @param tab
+         */
+        function add(tab) {
+            if (vm.tabs.length === 0) {
+                select(tab);
+            }
+            vm.tabs.push(tab);
+        }
+    }
+
 })();})(angular);
 (function () {
 
@@ -387,6 +499,16 @@ angular
 
   $templateCache.put('src/progress/progress.html',
     "<progress class=\"progress is-{{vm.color}}\" value=\"{{vm.value}}\" max=\"{{vm.max}}\">{{vm.value}}%</progress>"
+  );
+
+
+  $templateCache.put('src/tabs/tab/tab.html',
+    "<div ng-show=\"vm.selected\" ng-transclude></div>"
+  );
+
+
+  $templateCache.put('src/tabs/tabs.html',
+    "<div class=\"tabs\"><ul><li ng-repeat=\"tab in vm.tabs\" ng-class=\"{'is-active':tab.selected}\"><a ng-click=\"vm.select(tab)\">{{tab.title}}</a></li></ul></div><div class=\"content\" ng-transclude></div>"
   );
 
     }

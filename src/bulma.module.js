@@ -5,7 +5,8 @@
     angular
         .module('bulma', [
             'bulma.modal',
-            'bulma.progress'
+            'bulma.progress',
+            'bulma.tabs'
         ]);
 
 })();

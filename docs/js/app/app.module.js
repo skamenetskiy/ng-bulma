@@ -6,9 +6,10 @@
         .module('app', [
             'bulma',
             'hljs',
-            
+
             'app.modals',
-            'app.progress'
+            'app.progress',
+            'app.tabs'
         ])
         .config(config)
         .run(run);
@@ -30,5 +31,5 @@
      */
     function run() {
     }
-    
+
 })();

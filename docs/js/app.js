@@ -6,9 +6,10 @@
         .module('app', [
             'bulma',
             'hljs',
-            
+
             'app.modals',
-            'app.progress'
+            'app.progress',
+            'app.tabs'
         ])
         .config(config)
         .run(run);
@@ -30,7 +31,7 @@
      */
     function run() {
     }
-    
+
 })();
 (function () {
 
@@ -46,6 +47,16 @@
 
     angular
         .module('app.progress', []);
+
+})();
+(function () {
+
+    'use strict';
+
+    angular
+        .module('app.tabs', [
+            'bulma.tabs.tab'
+        ]);
 
 })();
 (function () {
@@ -159,6 +170,33 @@
         function setColor(color) {
             vm.color = color;
         }
+    }
+
+})();
+(function () {
+
+    'use strict';
+
+    angular
+        .module('app.tabs')
+        .component('exampleTabs', {
+            templateUrl: 'js/app/tabs/tabs.html',
+            controller:  'tabsController as vm',
+            transclude: true
+        });
+
+})();
+(function () {
+
+    'use strict';
+
+    angular
+        .module('app.tabs')
+        .controller('tabsController', tabsController);
+
+    tabsController.$inject = [];
+
+    function tabsController() {
     }
 
 })();
