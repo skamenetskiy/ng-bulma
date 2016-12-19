@@ -9,9 +9,10 @@
             controller:  'bulmaTabsTabController as vm',
             transclude:  true,
             bindings:    {
-                title: '@'
+                title: '@',
+                icon:  '@?'
             },
-            require:  {
+            require:     {
                 tabsCtrl: '^bulmaTabs'
             }
         });

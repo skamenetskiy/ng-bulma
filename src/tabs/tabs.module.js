@@ -3,6 +3,8 @@
     'use strict';
 
     angular
-        .module('bulma.tabs', []);
+        .module('bulma.tabs', [
+            'bulma.tabs.tab'
+        ]);
 
 })();

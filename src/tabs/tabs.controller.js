@@ -14,6 +14,7 @@
     function bulmaTabsController() {
         var vm    = this;
         vm.tabs   = [];
+        vm.class  = vm.class || '';
         vm.select = select;
         vm.add    = add;
 

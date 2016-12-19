@@ -35,7 +35,9 @@ angular
 (function () {
 
 angular
-        .module('bulma.tabs', []);
+        .module('bulma.tabs', [
+            'bulma.tabs.tab'
+        ]);
 
 })();
 // Source: src/bulma.component.js
@@ -387,9 +389,10 @@ angular
             controller:  'bulmaTabsTabController as vm',
             transclude:  true,
             bindings:    {
-                title: '@'
+                title: '@',
+                icon:  '@?'
             },
-            require:  {
+            require:     {
                 tabsCtrl: '^bulmaTabs'
             }
         });
@@ -426,6 +429,9 @@ angular
 angular
         .module('bulma.tabs')
         .component('bulmaTabs', {
+            bindings:    {
+                class: '@?'
+            },
             templateUrl: 'src/tabs/tabs.html',
             controller:  'bulmaTabsController as vm',
             transclude:  true
@@ -447,6 +453,7 @@ angular
     function bulmaTabsController() {
         var vm    = this;
         vm.tabs   = [];
+        vm.class  = vm.class || '';
         vm.select = select;
         vm.add    = add;
 
@@ -508,7 +515,7 @@ angular
 
 
   $templateCache.put('src/tabs/tabs.html',
-    "<div class=\"tabs\"><ul><li ng-repeat=\"tab in vm.tabs\" ng-class=\"{'is-active':tab.selected}\"><a ng-click=\"vm.select(tab)\">{{tab.title}}</a></li></ul></div><div class=\"content\" ng-transclude></div>"
+    "<div class=\"tabs {{vm.class}}\"><ul><li ng-repeat=\"tab in vm.tabs\" ng-class=\"{'is-active':tab.selected}\"><a ng-click=\"vm.select(tab)\"><span class=\"icon is-small\" ng-if=\"tab.icon\"><i class=\"{{tab.icon}}\"></i></span> <span>{{tab.title}}</span></a></li></ul></div><div class=\"content {{vm.class}}\" ng-transclude></div>"
   );
 
     }

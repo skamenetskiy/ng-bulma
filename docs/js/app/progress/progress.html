@@ -1,12 +1,12 @@
 <a name="progress"></a>
 <div class="box">
     <h1 class="title">Progress</h1>
-    <p class="control">
+    <div class="control">
         <bulma-progress max="100"
                         color="vm.color"
                         value="vm.value"></bulma-progress>
-    </p>
-    <p class="control">
+    </div>
+    <div class="control">
         <button class="button is-primary"
                 ng-click="vm.setValue(10)">Set 10
         </button>
@@ -37,8 +37,8 @@
         <button class="button is-primary"
                 ng-click="vm.setValue(100)">Set 100
         </button>
-    </p>
-    <p class="control">
+    </div>
+    <div class="control">
         <button class="button is-primary"
                 ng-click="vm.setColor('primary')">primary
         </button>
@@ -54,10 +54,19 @@
         <button class="button is-danger"
                 ng-click="vm.setColor('danger')">danger
         </button>
-    </p>
-    <p class="control">
-    <div hljs
-         hljs-language="javascript"
-         hljs-include="'js/app/progress/progress.controller.js'"></div>
-    </p>
+    </div>
+    <div class="control">
+        <bulma-tabs>
+            <bulma-tab title="progress.html">
+                <div hljs
+                     hljs-language="html"
+                     hljs-include="'js/app/progress/progress.html'"></div>
+            </bulma-tab>
+            <bulma-tab title="progress.controller.js">
+                <div hljs
+                     hljs-language="javascript"
+                     hljs-include="'js/app/progress/progress.controller.js'"></div>
+            </bulma-tab>
+        </bulma-tabs>
+    </div>
 </div>

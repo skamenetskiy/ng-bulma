@@ -28,5 +28,9 @@
     "font-awesome": "fontawesome#^4.7.0",
     "angular-highlightjs": "^0.6.2",
     "highlight": "^9.9.0"
+  },
+  "resolutions": {
+    "angular": "1.5.8",
+    "angular-mocks": "1.5.8"
   }
 }

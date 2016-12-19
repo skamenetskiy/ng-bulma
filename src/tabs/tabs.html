@@ -1,7 +1,14 @@
-<div class="tabs">
+<div class="tabs {{vm.class}}">
     <ul>
         <li ng-repeat="tab in vm.tabs"
-            ng-class="{'is-active':tab.selected}"><a ng-click="vm.select(tab)">{{tab.title}}</a></li>
+            ng-class="{'is-active':tab.selected}">
+            <a ng-click="vm.select(tab)">
+                <span class="icon is-small"
+                      ng-if="tab.icon"><i class="{{tab.icon}}"></i></span>
+                <span>{{tab.title}}</span>
+            </a>
+        </li>
     </ul>
 </div>
-<div class="content" ng-transclude></div>
+<div class="content {{vm.class}}"
+     ng-transclude></div>

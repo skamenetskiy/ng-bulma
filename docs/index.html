@@ -14,35 +14,33 @@
 </head>
 <body>
 <main ng-app="app">
-    <header class="header">
+    <div class="nav has-shadow header">
         <div class="container">
-            <div class="nav">
-                <div class="nav-left">
-                    <a class="nav-item is-brand"><h1 class="title">ng-bulma</h1></a>
-                </div>
-                <div class="nav-center">
-                    <a class="nav-item"
-                       href="https://github.com/skamenetskiy/ng-bulma">
+            <div class="nav-left">
+                <a class="nav-item is-brand"><h1 class="title">ng-bulma</h1></a>
+            </div>
+            <div class="nav-center">
+                <a class="nav-item"
+                   href="https://github.com/skamenetskiy/ng-bulma">
                         <span class="icon">
                             <i class="fa fa-github"></i>
                         </span>
-                    </a>
-                    <a class="nav-item"
-                       href="https://twitter.com/EvenSimon">
+                </a>
+                <a class="nav-item"
+                   href="https://twitter.com/EvenSimon">
                         <span class="icon">
                             <i class="fa fa-twitter"></i>
                         </span>
-                    </a>
-                </div>
-                <div class="nav-right">
-                    <a href="#modals" class="nav-item is-tab">Modals</a>
-                    <a href="#progress" class="nav-item is-tab">Progress</a>
-                    <a href="#tabs" class="nav-item is-tab">Tabs</a>
-                </div>
+                </a>
+            </div>
+            <div class="nav-right">
+                <a href="#modals" class="nav-item is-tab">Modals</a>
+                <a href="#progress" class="nav-item is-tab">Progress</a>
+                <a href="#tabs" class="nav-item is-tab">Tabs</a>
             </div>
         </div>
-    </header>
-    <div class="container">
+    </div>
+    <div class="container examples">
         <example-modals></example-modals>
         <example-progress></example-progress>
         <example-tabs></example-tabs>

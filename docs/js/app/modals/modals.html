@@ -1,12 +1,23 @@
-<a name="modal"></a>
+<a name="modals"></a>
 <div class="box">
     <h1 class="title">Modals</h1>
-    <button class="button is-primary"
-            ng-click="openModal()">Open Modal dialog
-    </button>
-    <div class="content">
-        <div hljs
-             hljs-language="javascript"
-             hljs-include="'js/app/modals/modals.controller.js'"></div>
+    <div class="control">
+        <button class="button is-primary"
+                ng-click="openModal()">Open Modal dialog
+        </button>
+    </div>
+    <div class="control">
+        <bulma-tabs>
+            <bulma-tab title="modals.html">
+                <div hljs
+                     hljs-language="javascript"
+                     hljs-include="'js/app/modals/modals.html'"></div>
+            </bulma-tab>
+            <bulma-tab title="modals.controller.js">
+                <div hljs
+                     hljs-language="javascript"
+                     hljs-include="'js/app/modals/modals.controller.js'"></div>
+            </bulma-tab>
+        </bulma-tabs>
     </div>
 </div>

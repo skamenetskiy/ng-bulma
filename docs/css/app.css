@@ -3,5 +3,16 @@
 }
 
 .header {
+    position:         fixed;
+    left:             0;
+    top:              0;
+    width:            100%;
+    display:          block;
     background-color: #fff;
+    z-index:          2;
+}
+
+.examples {
+    margin-top: 70px;
+    z-index:    1;
 }
