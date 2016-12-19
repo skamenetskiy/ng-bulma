@@ -20,7 +20,6 @@
      * App config
      */
     function config(hljsServiceProvider) {
-        console.log(hljsServiceProvider);
         hljsServiceProvider.setOptions({
             tabReplace: '    '
         });
