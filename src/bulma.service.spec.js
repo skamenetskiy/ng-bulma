@@ -87,6 +87,39 @@ describe('bulma.service', function () {
             }
         });
 
+        it('should try to load template from url', function (done) {
+            $$httpBackend
+                .expectGET('path/to/some/template.html');
+
+            $$httpBackend
+                .when('GET', 'path/to/some/template.html')
+                .respond('template over url');
+
+
+            $$bulma
+                .modal({
+                    controller:   function () {
+                        this.test = 123;
+                    },
+                    controllerAs: 'vm',
+                    templateUrl:  'path/to/some/template.html'
+                })
+                .then(testInstanceOf)
+                .catch(failTest)
+                .finally(done);
+
+            $$rootScope.$digest();
+            $$httpBackend.flush();
+
+            function testInstanceOf(modal) {
+                expect(modal.getOption('template')).toEqual('template over url');
+            }
+
+            function failTest(error) {
+                expect(error).toBeUndefined();
+            }
+        });
+
     });
 
 
