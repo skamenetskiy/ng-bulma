@@ -14,9 +14,7 @@ bulma is the main module which includes the ```<bulma/>``` component and the fol
 ### bulma.service
 The ```bulma``` service is accessible through the `bulma` argument
 
-#### Methods
-
-##### bulma.modal(options) : promise(BulmaModal)
+#### bulma.modal(options) : promise(BulmaModal)
 
 Option | Type | Description
 ------ | ---- | -----------
