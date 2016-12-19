@@ -22,6 +22,17 @@ module.exports = (grunt) => {
                     }
                 ]
             },
+            docs:    {
+                files: [
+                    {
+                        src:  [
+                            'docs/js/app/**/*.module.js',
+                            'docs/js/app/**/*.js'
+                        ],
+                        dest: 'docs/js/app.js'
+                    }
+                ]
+            },
             docs_md: {
                 files: [
                     {
@@ -67,7 +78,7 @@ module.exports = (grunt) => {
             }
         },
         copy:        {
-            docs_js:  {
+            docs_js:           {
                 src:     [
                     'bower_components/angular/angular.min.js',
                     'dist/bulma.min.js'
@@ -77,11 +88,56 @@ module.exports = (grunt) => {
                 expand:  true,
                 flatten: true
             },
-            docs_css: {
+            docs_css:          {
                 src:     [
                     'bower_components/bulma/css/bulma.css'
                 ],
                 dest:    'docs/css/',
+                filter:  'isFile',
+                expand:  true,
+                flatten: true
+            },
+            fontawesome_css:   {
+                src:     [
+                    'bower_components/font-awesome/css/font-awesome.min.css'
+                ],
+                dest:    'docs/css/',
+                filter:  'isFile',
+                expand:  true,
+                flatten: true
+            },
+            fontawesome_fonts: {
+                src:     [
+                    'bower_components/font-awesome/fonts/*'
+                ],
+                dest:    'docs/fonts/',
+                filter:  'isFile',
+                expand:  true,
+                flatten: true
+            },
+            highlight_core:    {
+                src:     [
+                    'bower_components/highlight/build/highlight.pack.js'
+                ],
+                dest:    'docs/js/',
+                filter:  'isFile',
+                expand:  true,
+                flatten: true
+            },
+            highlight_css:     {
+                src:     [
+                    'bower_components/highlight/src/styles/github.css'
+                ],
+                dest:    'docs/css/',
+                filter:  'isFile',
+                expand:  true,
+                flatten: true
+            },
+            highlight_angular: {
+                src:     [
+                    'bower_components/angular-highlightjs/angular-highlightjs.min.js'
+                ],
+                dest:    'docs/js/',
                 filter:  'isFile',
                 expand:  true,
                 flatten: true
@@ -108,6 +164,12 @@ module.exports = (grunt) => {
     grunt.registerTask('docs', [
         'copy:docs_js',
         'copy:docs_css',
+        'copy:fontawesome_css',
+        'copy:fontawesome_fonts',
+        'copy:highlight_core',
+        'copy:highlight_css',
+        'copy:highlight_angular',
+        'concat:docs',
         'concat:docs_md'
     ]);
 

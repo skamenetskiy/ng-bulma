@@ -1,0 +1,63 @@
+<a name="progress"></a>
+<div class="box">
+    <h1 class="title">Progress</h1>
+    <p class="control">
+        <bulma-progress max="100"
+                        color="vm.color"
+                        value="vm.value"></bulma-progress>
+    </p>
+    <p class="control">
+        <button class="button is-primary"
+                ng-click="vm.setValue(10)">Set 10
+        </button>
+        <button class="button is-primary"
+                ng-click="vm.setValue(20)">Set 20
+        </button>
+        <button class="button is-primary"
+                ng-click="vm.setValue(30)">Set 30
+        </button>
+        <button class="button is-primary"
+                ng-click="vm.setValue(40)">Set 40
+        </button>
+        <button class="button is-primary"
+                ng-click="vm.setValue(50)">Set 50
+        </button>
+        <button class="button is-primary"
+                ng-click="vm.setValue(60)">Set 60
+        </button>
+        <button class="button is-primary"
+                ng-click="vm.setValue(70)">Set 70
+        </button>
+        <button class="button is-primary"
+                ng-click="vm.setValue(80)">Set 80
+        </button>
+        <button class="button is-primary"
+                ng-click="vm.setValue(90)">Set 90
+        </button>
+        <button class="button is-primary"
+                ng-click="vm.setValue(100)">Set 100
+        </button>
+    </p>
+    <p class="control">
+        <button class="button is-primary"
+                ng-click="vm.setColor('primary')">primary
+        </button>
+        <button class="button is-info"
+                ng-click="vm.setColor('info')">info
+        </button>
+        <button class="button is-success"
+                ng-click="vm.setColor('success')">success
+        </button>
+        <button class="button is-warning"
+                ng-click="vm.setColor('warning')">warning
+        </button>
+        <button class="button is-danger"
+                ng-click="vm.setColor('danger')">danger
+        </button>
+    </p>
+    <p class="control">
+    <div hljs
+         hljs-language="javascript"
+         hljs-include="'js/app/progress/progress.controller.js'"></div>
+    </p>
+</div>

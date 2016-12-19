@@ -4,27 +4,46 @@
     <meta charset="UTF-8">
     <title>ng-bulma</title>
     <link rel="stylesheet"
-          type="text/css"
           href="css/bulma.css">
     <link rel="stylesheet"
-          type="text/css"
+          href="css/font-awesome.min.css">
+    <link rel="stylesheet"
           href="css/app.css">
+    <link rel="stylesheet"
+          href="css/github.css">
 </head>
 <body>
-<div ng-app="app">
+<main ng-app="app">
+    <header class="header">
+        <div class="container">
+            <div class="nav">
+                <div class="nav-left">
+                    <a class="nav-item is-brand"><h1 class="title">ng-bulma</h1></a>
+                </div>
+                <div class="nav-center">
+                    <a class="nav-item"
+                       href="https://github.com/skamenetskiy/ng-bulma">
+                        <span class="icon">
+                            <i class="fa fa-github"></i>
+                        </span>
+                    </a>
+                    <a class="nav-item"
+                       href="https://twitter.com/EvenSimon">
+                        <span class="icon">
+                            <i class="fa fa-twitter"></i>
+                        </span>
+                    </a>
+                </div>
+                <div class="nav-right">
+                    <a href="#modals" class="nav-item is-tab">Modals</a>
+                    <a href="#progress" class="nav-item is-tab">Progress</a>
+                </div>
+            </div>
+        </div>
+    </header>
     <div class="container">
-        <a name="modal"></a>
-        <div class="box"
-             ng-controller="modalsController">
-            <button class="button is-primary"
-                    ng-click="openModal()">Open Modal dialog
-            </button>
-        </div>
-        <a name="modal"></a>
-        <div class="box"
-             ng-controller="progressController as vm">
-            <bulma-progress max="100" color="danger" value="vm.value"></bulma-progress>
-        </div>
+        <example-modals></example-modals>
+        <example-progress></example-progress>
     </div>
     <bulma></bulma>
     <script type="text/ng-template" id="modal1.html">
@@ -42,9 +61,11 @@
         </div>
         <button class="modal-close"></button>
     </script>
-</div>
+</main>
 <script src="js/angular.min.js"></script>
 <script src="js/bulma.min.js"></script>
+<script src="js/highlight.pack.js"></script>
+<script src="js/angular-highlightjs.min.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

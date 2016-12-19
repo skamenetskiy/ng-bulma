@@ -49,7 +49,8 @@ bulma is the main module which includes the ```<bulma/>``` component and the fol
 - bulma.progress
 
 ### bulma.service
-The ```bulma``` service is accessible through the `bulma` argument
+The ```bulma``` service is accessible through the `bulma` argument.
+ - [bulma.modal](#bulmamodaloptions--promisebulmamodal)
 
 #### bulma.modal(options) : promise(BulmaModal)
 

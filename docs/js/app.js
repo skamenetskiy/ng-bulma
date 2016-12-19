@@ -3,17 +3,26 @@
     'use strict';
 
     angular
-        .module('app', ['bulma'])
+        .module('app', [
+            'bulma',
+            'hljs',
+            
+            'app.modals',
+            'app.progress'
+        ])
         .config(config)
-        .run(run)
-        .controller('modalsController', modalsController)
-        .controller('progressController', progressController)
-        .controller('sampleModalsController', sampleModalsController);
+        .run(run);
+
+    config.$inject = ['hljsServiceProvider'];
 
     /**
      * App config
      */
-    function config() {
+    function config(hljsServiceProvider) {
+        console.log(hljsServiceProvider);
+        hljsServiceProvider.setOptions({
+            tabReplace: '    '
+        });
     }
 
     /**
@@ -21,23 +30,58 @@
      */
     function run() {
     }
+    
+})();
+(function () {
+
+    'use strict';
+
+    angular
+        .module('app.modals', []);
+
+})();
+(function () {
+
+    'use strict';
+
+    angular
+        .module('app.progress', []);
+
+})();
+(function () {
+
+    'use strict';
+
+    angular
+        .module('app.modals')
+        .component('exampleModals', {
+            templateUrl: 'js/app/modals/modals.html',
+            controller:  'modalsController as vm'
+        });
+
+})();
+(function () {
+
+    'use strict';
+
+    angular
+        .module('app.modals')
+        .controller('modalsController', modalsController)
+        .controller('sampleModalsController', sampleModalsController);
 
     modalsController.$inject = [
-        '$scope',
         'bulma'
     ];
 
     /**
-     * @param $scope
      * @param {Bulma} bulma
      */
-    function modalsController($scope,
-                              bulma) {
+    function modalsController(bulma) {
+        var vm       = this;
+        vm.openModal = openModal;
 
-        var modal = null;
-
-        $scope.openModal = function () {
-            modal = bulma
+        function openModal() {
+            bulma
                 .modal({
                     templateUrl:  'modal1.html',
                     controller:   'sampleModalsController',
@@ -47,7 +91,7 @@
                     modal.show();
                     console.log(modal);
                 });
-        };
+        }
 
     }
 
@@ -69,14 +113,52 @@
         }, 3000);
     }
 
-    progressController.$inject = ['$timeout'];
+})();
+(function () {
 
-    function progressController($timeout) {
-        var vm   = this;
-        vm.value = 30;
-        $timeout(function () {
-            vm.value = 70;
-        }, 3000);
+    'use strict';
+
+    angular
+        .module('app.progress')
+        .component('exampleProgress', {
+            templateUrl: 'js/app/progress/progress.html',
+            controller:  'progressController as vm'
+        });
+
+})();
+(function () {
+
+    'use strict';
+
+    angular
+        .module('app.progress')
+        .controller('progressController', progressController);
+
+    progressController.$inject = [];
+
+    /**
+     * progressController
+     */
+    function progressController() {
+        var vm      = this;
+        vm.value    = 30;
+        vm.color    = 'primary';
+        vm.setValue = setValue;
+        vm.setColor = setColor;
+
+        /**
+         * @param value
+         */
+        function setValue(value) {
+            vm.value = value;
+        }
+
+        /**
+         * @param color
+         */
+        function setColor(color) {
+            vm.color = color;
+        }
     }
 
 })();

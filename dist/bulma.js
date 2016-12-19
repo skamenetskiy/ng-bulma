@@ -112,7 +112,7 @@ angular
                             options.template = template;
                             resolve(modal);
                         })
-                        .catch(reject)
+                        .catch(reject);
                 }
             });
         }
@@ -327,8 +327,8 @@ angular
             bindings:    {
                 value: '=',
                 max:   '=',
-                size:  '@',
-                color: '@'
+                size:  '=',
+                color: '='
             },
             templateUrl: 'src/progress/progress.html',
             controller:  'bulmaProgressController as vm'
@@ -386,7 +386,7 @@ angular
 
 
   $templateCache.put('src/progress/progress.html',
-    "<progress class=\"progress\" ng-class=\"vm.classes\" value=\"{{vm.value}}\" max=\"{{vm.max}}\">{{vm.value}}%</progress>"
+    "<progress class=\"progress is-{{vm.color}}\" value=\"{{vm.value}}\" max=\"{{vm.max}}\">{{vm.value}}%</progress>"
   );
 
     }

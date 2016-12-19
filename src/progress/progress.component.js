@@ -8,8 +8,8 @@
             bindings:    {
                 value: '=',
                 max:   '=',
-                size:  '@',
-                color: '@'
+                size:  '=',
+                color: '='
             },
             templateUrl: 'src/progress/progress.html',
             controller:  'bulmaProgressController as vm'
