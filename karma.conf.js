@@ -16,10 +16,7 @@ module.exports = function (config) {
         logLevel:      config.LOG_INFO,
         autoWatch:     true,
         browsers:      [
-            'PhantomJS',
-            'Chrome'
-            // 'Firefox',
-            // 'Safari'
+            'PhantomJS'
         ],
         singleRun:     false,
         concurrency:   Infinity
