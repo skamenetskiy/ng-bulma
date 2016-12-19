@@ -24,29 +24,37 @@
                                   $controller,
                                   $compile,
                                   $element) {
-        var vm         = this;
-        var scope      = $scope.$new(true, $scope);
-        var controller = $controller(
-            vm.modal.getOption('controller'),
-            {
-                $scope:           scope,
-                bulmaModal:       vm.modal,
-                bindToController: true
-            },
-            true,
-            vm.modal.getOption('controllerAs')
-        );
+        var vm    = this;
+        var scope = $scope.$new(true, $scope);
 
-        vm.classes = vm.modal.classes = angular.merge({
-            'is-active': vm.modal.visible
-        }, vm.modal.getOption('classes'));
+        activate();
 
-        $element
-            .children(0)
-            .data('$ngControllerController', controller())
-            .html(vm.modal.getOption('template'));
+        /**
+         * activate
+         */
+        function activate() {
+            var controller = $controller(
+                vm.modal.getOption('controller'),
+                {
+                    $scope:           scope,
+                    bulmaModal:       vm.modal,
+                    bindToController: true
+                },
+                true,
+                vm.modal.getOption('controllerAs')
+            );
 
-        $compile($element.contents())(scope);
+            vm.classes = vm.modal.classes = angular.merge({
+                'is-active': vm.modal.visible
+            }, vm.modal.getOption('classes'));
+
+            $element
+                .children(0)
+                .data('$ngControllerController', controller())
+                .html(vm.modal.getOption('template'));
+
+            $compile($element.contents())(scope);
+        }
     }
 
 })();

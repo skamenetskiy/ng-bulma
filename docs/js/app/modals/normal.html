@@ -1,0 +1,16 @@
+<div class="modal-background"></div>
+<div class="modal-card">
+    <header class="modal-card-head">
+        <p class="modal-card-title">Modal title</p>
+        <button class="delete"
+                ng-click="vm.close()"></button>
+    </header>
+    <section class="modal-card-body">{{vm.hello}}</section>
+    <footer class="modal-card-foot">
+        <a class="button is-primary">Save changes</a>
+        <a class="button"
+           ng-click="vm.close()">Cancel</a>
+    </footer>
+</div>
+<button class="modal-close"
+        ng-click="vm.close()"></button>

@@ -4,8 +4,7 @@
 
     angular
         .module('app.modals')
-        .controller('modalsController', modalsController)
-        .controller('sampleModalsController', sampleModalsController);
+        .controller('modalsController', modalsController);
 
     modalsController.$inject = [
         'bulma'
@@ -15,40 +14,41 @@
      * @param {Bulma} bulma
      */
     function modalsController(bulma) {
-        var vm       = this;
-        vm.openModal = openModal;
+        var vm             = this;
+        vm.openSelfClosing = openSelfClosing;
+        vm.openNormal      = openNormal;
 
-        function openModal() {
+        /**
+         * openSelfClosing
+         */
+        function openSelfClosing() {
             bulma
                 .modal({
-                    templateUrl:  'modal1.html',
-                    controller:   'sampleModalsController',
+                    templateUrl:  'js/app/modals/selfClose.html',
+                    controller:   'selfCloseModalController',
                     controllerAs: 'vm'
                 })
                 .then(function (modal) {
                     modal.show();
-                    console.log(modal);
-                });
+                })
+                .catch(console.error);
         }
 
-    }
-
-    sampleModalsController.$inject = ['$scope', '$timeout', 'bulmaModal'];
-
-    function sampleModalsController($scope, $timeout, bulmaModal) {
-        var vm   = this;
-        vm.hello = 123;
-
-        $scope.$on('$destroy', function () {
-            console.log('destroy sampleModalsController');
-        });
-
-        $timeout(function () {
-            vm.hello = 321;
-            $timeout(function () {
-                bulmaModal.destroy();
-            }, 3000);
-        }, 3000);
+        /**
+         * openNormal
+         */
+        function openNormal() {
+            bulma
+                .modal({
+                    templateUrl:  'js/app/modals/normal.html',
+                    controller:   'normalModalController',
+                    controllerAs: 'vm'
+                })
+                .then(function (modal) {
+                    modal.show();
+                })
+                .catch(console.error);
+        }
     }
 
 })();

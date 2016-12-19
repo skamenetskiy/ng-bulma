@@ -74,8 +74,7 @@
 
     angular
         .module('app.modals')
-        .controller('modalsController', modalsController)
-        .controller('sampleModalsController', sampleModalsController);
+        .controller('modalsController', modalsController);
 
     modalsController.$inject = [
         'bulma'
@@ -85,40 +84,110 @@
      * @param {Bulma} bulma
      */
     function modalsController(bulma) {
-        var vm       = this;
-        vm.openModal = openModal;
+        var vm             = this;
+        vm.openSelfClosing = openSelfClosing;
+        vm.openNormal      = openNormal;
 
-        function openModal() {
+        /**
+         * openSelfClosing
+         */
+        function openSelfClosing() {
             bulma
                 .modal({
-                    templateUrl:  'modal1.html',
-                    controller:   'sampleModalsController',
+                    templateUrl:  'js/app/modals/selfClose.html',
+                    controller:   'selfCloseModalController',
                     controllerAs: 'vm'
                 })
                 .then(function (modal) {
                     modal.show();
-                    console.log(modal);
-                });
+                })
+                .catch(console.error);
         }
 
+        /**
+         * openNormal
+         */
+        function openNormal() {
+            bulma
+                .modal({
+                    templateUrl:  'js/app/modals/normal.html',
+                    controller:   'normalModalController',
+                    controllerAs: 'vm'
+                })
+                .then(function (modal) {
+                    modal.show();
+                })
+                .catch(console.error);
+        }
     }
 
-    sampleModalsController.$inject = ['$scope', '$timeout', 'bulmaModal'];
+})();
+(function () {
 
-    function sampleModalsController($scope, $timeout, bulmaModal) {
+    'use strict';
+
+    angular
+        .module('app.modals')
+        .controller('normalModalController', normalModalController);
+
+    normalModalController.$inject = ['bulmaModal'];
+
+    /**
+     * @param {BulmaModal} bulmaModal
+     */
+    function normalModalController(bulmaModal) {
         var vm   = this;
-        vm.hello = 123;
+        vm.close = close;
+        vm.hello = 'Hello World!';
 
-        $scope.$on('$destroy', function () {
-            console.log('destroy sampleModalsController');
-        });
+        /**
+         * close
+         */
+        function close() {
+            bulmaModal.destroy();
+        }
+    }
 
-        $timeout(function () {
-            vm.hello = 321;
+})();
+(function () {
+
+    'use strict';
+
+    angular
+        .module('app.modals')
+        .controller('selfCloseModalController', selfCloseModalController);
+
+    selfCloseModalController.$inject = [
+        '$timeout',
+        'bulmaModal'
+    ];
+
+    /**
+     * @param $timeout
+     * @param {BulmaModal} bulmaModal
+     */
+    function selfCloseModalController($timeout,
+                                      bulmaModal) {
+        var vm   = this;
+        vm.close = close;
+
+        activate();
+
+        /**
+         * activate
+         */
+        function activate() {
             $timeout(function () {
                 bulmaModal.destroy();
-            }, 3000);
-        }, 3000);
+            }, 5000);
+        }
+
+        /**
+         * close the modal (destroy)
+         */
+        function close() {
+            bulmaModal.destroy();
+        }
     }
 
 })();

@@ -45,21 +45,25 @@
          * @public
          */
         function modal(options) {
-            var modal = new BulmaModal(prepareOptions(options));
-
-            options.modals = this.modals;
-            this.modals.push(modal);
-
+            var $this = this;
             return $q(function (resolve, reject) {
+                var modal      = new BulmaModal(prepareOptions(options));
+                options.modals = $this.modals;
+
                 if (options.template) {
                     resolve(modal);
                 } else {
                     $templateRequest(options.templateUrl)
                         .then(function (template) {
                             options.template = template;
-                            resolve(modal);
                         })
-                        .catch(reject);
+                        .catch(reject)
+                        .finally(done);
+                }
+
+                function done() {
+                    $this.modals.push(modal);
+                    resolve(modal);
                 }
             });
         }
