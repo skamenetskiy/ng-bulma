@@ -14,17 +14,18 @@ describe('bulma.controller', function () {
     beforeEach(angular.mock.module('bulma'));
     beforeEach(function () {
         angular.mock.inject(function ($injector) {
-            $$httpBackend = $injector.get('$httpBackend');
-            $$rootScope   = $injector.get('$rootScope');
-            $$controller  = $injector.get('$controller');
-            controller    = $$controller('bulmaController', {$scope: $scope});
+            $$httpBackend          = $injector.get('$httpBackend');
+            $$rootScope            = $injector.get('$rootScope');
+            $$controller           = $injector.get('$controller');
+            $$bulma                = $injector.get('bulma');
+            $$BulmaModal           = $injector.get('BulmaModal');
+            $$BulmaModalCollection = $injector.get('BulmaModalCollection');
+            controller             = $$controller('bulmaController', {
+                $scope: $scope,
+                bulma:  $$bulma
+            });
         });
     });
-    beforeEach(inject(function (bulma, BulmaModal, BulmaModalCollection) {
-        $$bulma                = bulma;
-        $$BulmaModal           = BulmaModal;
-        $$BulmaModalCollection = BulmaModalCollection;
-    }));
 
     it('creates modals collection', function () {
         expect(controller.modals).toBeDefined();

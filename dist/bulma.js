@@ -121,19 +121,16 @@ angular
                 options.modals = $this.modals;
 
                 if (options.template) {
+                    $this.modals.push(modal);
                     resolve(modal);
                 } else {
                     $templateRequest(options.templateUrl)
                         .then(function (template) {
                             options.template = template;
+                            $this.modals.push(modal);
+                            resolve(modal);
                         })
-                        .catch(reject)
-                        .finally(done);
-                }
-
-                function done() {
-                    $this.modals.push(modal);
-                    resolve(modal);
+                        .catch(reject);
                 }
             });
         }
