@@ -18,7 +18,7 @@ module.exports = (grunt) => {
                             'src/**/*.js',
                             '!src/**/*.spec.js'
                         ],
-                        dest: 'dist/bulma.js'
+                        dest: 'dist/ng-bulma.js'
                     }
                 ]
             },
@@ -67,8 +67,8 @@ module.exports = (grunt) => {
             dist: {
                 files: [
                     {
-                        src:  'dist/bulma.js',
-                        dest: 'dist/bulma.min.js'
+                        src:  'dist/ng-bulma.js',
+                        dest: 'dist/ng-bulma.min.js'
                     }
                 ]
             }
@@ -92,14 +92,14 @@ module.exports = (grunt) => {
                     }
                 },
                 src:     'src/**/*.html',
-                dest:    'dist/bulma.js'
+                dest:    'dist/ng-bulma.js'
             }
         },
         copy:        {
             docs_js:           {
                 src:     [
                     'bower_components/angular/angular.min.js',
-                    'dist/bulma.min.js'
+                    'dist/ng-bulma.min.js'
                 ],
                 dest:    'docs/js/',
                 filter:  'isFile',

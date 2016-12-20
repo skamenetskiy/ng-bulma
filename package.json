@@ -2,9 +2,9 @@
   "name": "ng-bulma",
   "version": "1.0.2",
   "description": "AngularJs wrapper for bulma",
-  "main": "dist/bulma.js",
+  "main": "dist/ng-bulma.js",
   "scripts": {
-    "test": "node_modules/.bin/karma start"
+    "test": "node_modules/.bin/karma start --single-run"
   },
   "repository": {
     "type": "git",
@@ -12,6 +12,7 @@
   },
   "keywords": [
     "angular",
+    "angularjs",
     "bulma"
   ],
   "author": "Simon Kamenetskiy",
