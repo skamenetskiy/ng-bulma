@@ -1,3 +1,11 @@
 <!-- Modals -->
-<bulma-modal ng-repeat="modal in vm.modals"
-             modal="modal"></bulma-modal>
+<bulma-modals>
+    <bulma-modal ng-repeat="modal in vm.modals"
+                 modal="modal"></bulma-modal>
+</bulma-modals>
+
+<!-- Toaster -->
+<bulma-toasts>
+    <bulma-toast ng-repeat="toast in vm.toasts"
+                 toast="toast"></bulma-toast>
+</bulma-toasts>

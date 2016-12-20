@@ -6,7 +6,8 @@ angular
         .module('bulma', [
             'bulma.modal',
             'bulma.progress',
-            'bulma.tabs'
+            'bulma.tabs',
+            'bulma.toast'
         ]);
 
 })();
@@ -40,6 +41,13 @@ angular
         ]);
 
 })();
+// Source: src/toast/toast.module.js
+(function () {
+
+angular
+        .module('bulma.toast', []);
+
+})();
 // Source: src/bulma.component.js
 (function () {
 
@@ -66,6 +74,7 @@ angular
     function bulmaController(bulma) {
         var vm    = this;
         vm.modals = bulma.modals;
+        vm.toasts = bulma.toasts;
     }
 
 })();
@@ -80,8 +89,19 @@ angular
         '$q',
         '$templateRequest',
         'BulmaModal',
-        'BulmaModalCollection'
+        'BulmaModalCollection',
+        'BulmaToast',
+        'BulmaToastCollection'
     ];
+
+    /**
+     * @type {Object}
+     */
+    var configuration = {
+        toast: {
+            position: 'bl'
+        }
+    };
 
     /**
      * Service container
@@ -89,14 +109,20 @@ angular
      * @param $templateRequest
      * @param BulmaModal
      * @param BulmaModalCollection
+     * @param BulmaToast
+     * @param BulmaToastCollection
      * @returns {Bulma}
      */
     function service($q,
                      $templateRequest,
                      BulmaModal,
-                     BulmaModalCollection) {
+                     BulmaModalCollection,
+                     BulmaToast,
+                     BulmaToastCollection) {
 
-        Bulma.prototype.modal = modal;
+        Bulma.prototype.modal     = modal;
+        Bulma.prototype.toast     = toast;
+        Bulma.prototype.configure = configure;
 
         return new Bulma();
 
@@ -105,7 +131,9 @@ angular
          * @constructor
          */
         function Bulma() {
-            this.modals = new BulmaModalCollection();
+            this.modals        = new BulmaModalCollection();
+            this.toasts        = new BulmaToastCollection();
+            this.configuration = configuration;
         }
 
         /**
@@ -117,7 +145,7 @@ angular
         function modal(options) {
             var $this = this;
             return $q(function (resolve, reject) {
-                var modal      = new BulmaModal(prepareOptions(options));
+                var modal      = new BulmaModal(prepareModalOptions(options));
                 options.modals = $this.modals;
 
                 if (options.template) {
@@ -136,12 +164,28 @@ angular
         }
 
         /**
-         * Prepare the options
+         * Creates new toast
+         * @param options
+         * @returns {$q.promise}
+         * @public
+         */
+        function toast(options) {
+            var $this = this;
+            return $q(function (resolve) {
+                var toast      = new BulmaToast(prepareToastOptions(options));
+                options.toasts = $this.toasts;
+                $this.toasts.push(toast);
+                resolve(toast);
+            });
+        }
+
+        /**
+         * Prepare modal options
          * @param {Object} options
          * @returns {Object}
          * @private
          */
-        function prepareOptions(options) {
+        function prepareModalOptions(options) {
             options              = options || {};
             options.template     = options.template || null;
             options.templateUrl  = options.templateUrl || null;
@@ -159,6 +203,41 @@ angular
 
             return options;
         }
+
+        /**
+         * Prepare toast options
+         * @param {Object} options
+         * @returns {Object}
+         * @private
+         */
+        function prepareToastOptions(options) {
+            options             = options || {};
+            options.closeButton = options.closeButton || null;
+            options.type        = options.type || 'primary';
+            options.contents    = options.contents || '';
+            options.timeout     = options.timeout || null;
+
+            if (options.closeButton === null) {
+                options.closeButton = true;
+            }
+
+            if (options.timeout === null) {
+                options.timeout = false;
+            }
+
+            return options;
+        }
+
+        /**
+         * Configure bulma
+         * @param {String} section
+         * @param {Object} config
+         */
+        function configure(section, config) {
+            angular.forEach(config, function (value, key) {
+                configuration[section][key] = value;
+            });
+        }
     }
 
 })();
@@ -173,6 +252,10 @@ angular
             },
             templateUrl: 'src/modal/modal.html',
             controller:  'bulmaModalController as vm'
+        })
+        .component('bulmaModals', {
+            transclude: true,
+            template:   '<ng-transclude></ng-transclude>'
         });
 
 })();
@@ -489,6 +572,174 @@ angular
         }
     }
 
+})();
+// Source: src/toast/toast.component.js
+(function () {
+
+angular
+        .module('bulma.toast')
+        .component('bulmaToast', {
+            bindings:    {
+                toast:  '=',
+                inline: '=?'
+            },
+            templateUrl: 'src/toast/toast.html',
+            controller:  'bulmaToastController as vm'
+        })
+        .component('bulmaToasts', {
+            transclude: true,
+            template:   '<ng-transclude></ng-transclude>',
+            controller: 'bulmaToastsController as vm'
+        });
+
+})();
+// Source: src/toast/toast.controller.js
+(function () {
+
+angular
+        .module('bulma.toast')
+        .controller('bulmaToastController', bulmaToastController)
+        .controller('bulmaToastsController', bulmaToastsController);
+
+    bulmaToastController.$inject = [
+        '$scope',
+        '$sce',
+        '$timeout'
+    ];
+
+    /**
+     * bulmaToasterController
+     * @param $scope
+     * @param $sce
+     * @param $timeout
+     */
+    function bulmaToastController($scope,
+                                  $sce,
+                                  $timeout) {
+        var vm      = this;
+        var style   = vm.toast.getOption('type');
+        var timeout = vm.toast.getOption('timeout');
+        vm.close    = close;
+
+        activate();
+
+        /**
+         * Activate the controller
+         */
+        function activate() {
+            vm.inline    = vm.inline !== false;
+            vm.showClose = vm.toast.getOption('closeButton');
+            vm.contents  = $sce.trustAsHtml(vm.toast.getOption('contents'));
+            vm.style     = style !== null
+                ? 'is-' + style
+                : '';
+
+            if (typeof(timeout) === 'number' && timeout > 0) {
+                var tm = $timeout(function () {
+                    vm.toast.destroy();
+                }, timeout);
+                $scope.$on('$destroy', function () {
+                    $timeout.cancel(tm);
+                });
+            }
+        }
+
+        /**
+         * Close (destroy) the toast
+         */
+        function close() {
+            vm.toast.destroy();
+        }
+    }
+
+    bulmaToastsController.$inject = [
+        '$element',
+        'bulma'
+    ];
+
+    function bulmaToastsController($element, bulma) {
+        $element
+            .removeClass('p-lt p-rt p-lb p-rb')
+            .addClass('p-' + bulma.configuration.toast.position);
+    }
+
+})();
+// Source: src/toast/toast.model.js
+(function () {
+
+angular
+        .module('bulma.toast')
+        .constant('BulmaToast', BulmaToast)
+        .constant('BulmaToastCollection', BulmaToastCollection);
+
+    BulmaToast.prototype.destroy = destroy;
+
+    BulmaToastCollection.prototype             = [];
+    BulmaToastCollection.prototype.findToast   = findToast;
+    BulmaToastCollection.prototype.removeToast = removeToast;
+
+    /**
+     * @param {Object} options
+     * @constructor
+     */
+    function BulmaToast(options) {
+        this.getOption = getOption;
+
+        /**
+         * Returns a toast option
+         * @param {String} option
+         * @returns {*}
+         * @public
+         */
+        function getOption(option) {
+            if (option in options) {
+                return options[option];
+            }
+            return undefined;
+        }
+    }
+
+    /**
+     * @constructor
+     */
+    function BulmaToastCollection() {
+    }
+
+    function destroy() {
+        this
+            .getOption('toasts')
+            .removeToast(this);
+    }
+
+    /**
+     * Returns modal index in collection, -1 if modal not found
+     * @param {BulmaToast} toast
+     * @returns {Number}
+     * @public
+     */
+    function findToast(toast) {
+        for (var i = 0; i < this.length; i++) {
+            if (this[i] === toast) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Remove a modal from collection
+     * @param {BulmaToast} toast
+     * @returns {Boolean}
+     * @public
+     */
+    function removeToast(toast) {
+        var index = this.findToast(toast);
+        if (index !== -1) {
+            this.splice(index, 1);
+        }
+        return false;
+    }
+
 })();})(angular);
 (function () {
 
@@ -504,7 +755,7 @@ angular
           'use strict';
 
   $templateCache.put('src/bulma.html',
-    "<bulma-modal ng-repeat=\"modal in vm.modals\" modal=\"modal\"></bulma-modal>"
+    "<bulma-modals><bulma-modal ng-repeat=\"modal in vm.modals\" modal=\"modal\"></bulma-modal></bulma-modals><bulma-toasts><bulma-toast ng-repeat=\"toast in vm.toasts\" toast=\"toast\"></bulma-toast></bulma-toasts>"
   );
 
 
@@ -525,6 +776,11 @@ angular
 
   $templateCache.put('src/tabs/tabs.html',
     "<div class=\"tabs {{vm.class}}\"><ul><li ng-repeat=\"tab in vm.tabs\" ng-class=\"{'is-active':tab.selected}\"><a ng-click=\"vm.select(tab)\"><span class=\"icon is-small\" ng-if=\"tab.icon\"><i class=\"{{tab.icon}}\"></i></span> <span>{{tab.title}}</span></a></li></ul></div><div class=\"content {{vm.class}}\" ng-transclude></div>"
+  );
+
+
+  $templateCache.put('src/toast/toast.html',
+    "<div class=\"notification {{vm.style}}\" ng-class=\"vm.classes\"><button class=\"delete\" ng-if=\"vm.showClose\" ng-click=\"vm.close()\"></button><div ng-bind-html=\"vm.contents\"></div></div>"
   );
 
     }

@@ -1,0 +1,32 @@
+bulma-toasts {
+    position:  fixed;
+    padding:   20px;
+    max-width: 25%;
+    z-index:   99999;
+
+    &.p-lt {
+        left: 0;
+        top:  0;
+    }
+
+    &.p-rt {
+        right: 0;
+        top:   0;
+    }
+
+    &.p-lb {
+        left:   0;
+        bottom: 0;
+    }
+
+    &.p-rb {
+        right:  0;
+        bottom: 0;
+    }
+
+    bulma-toast {
+        .notification {
+            margin-top: 20px;
+        }
+    }
+}

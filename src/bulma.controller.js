@@ -14,6 +14,7 @@
     function bulmaController(bulma) {
         var vm    = this;
         vm.modals = bulma.modals;
+        vm.toasts = bulma.toasts;
     }
 
 })();

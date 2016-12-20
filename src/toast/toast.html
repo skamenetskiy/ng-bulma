@@ -1,0 +1,7 @@
+<div class="notification {{vm.style}}"
+     ng-class="vm.classes">
+    <button class="delete"
+            ng-if="vm.showClose"
+            ng-click="vm.close()"></button>
+    <div ng-bind-html="vm.contents"></div>
+</div>

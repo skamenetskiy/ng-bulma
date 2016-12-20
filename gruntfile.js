@@ -22,6 +22,14 @@ module.exports = (grunt) => {
                     }
                 ]
             },
+            sass:    {
+                files: [
+                    {
+                        src:  'src/**/*.scss',
+                        dest: 'tmp/ng-bulma.scss'
+                    }
+                ]
+            },
             docs:    {
                 files: [
                     {
@@ -43,6 +51,16 @@ module.exports = (grunt) => {
                         dest: 'README.md'
                     }
                 ]
+            }
+        },
+        sass:        {
+            options: {
+                style: 'compressed'
+            },
+            dist:    {
+                files: {
+                    'dist/ng-bulma.css': 'tmp/ng-bulma.scss'
+                }
             }
         },
         uglify:      {
@@ -90,7 +108,8 @@ module.exports = (grunt) => {
             },
             docs_css:          {
                 src:     [
-                    'bower_components/bulma/css/bulma.css'
+                    'bower_components/bulma/css/bulma.css',
+                    'dist/ng-bulma.css'
                 ],
                 dest:    'docs/css/',
                 filter:  'isFile',
@@ -142,12 +161,21 @@ module.exports = (grunt) => {
                 expand:  true,
                 flatten: true
             }
+        },
+        clean:       {
+            dist: {
+                src: [
+                    'tmp'
+                ]
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-angular-templates');
 
     grunt.registerTask('default', [
@@ -158,7 +186,10 @@ module.exports = (grunt) => {
     grunt.registerTask('build', [
         'concat:dist',
         'ngtemplates:dist',
-        'uglify:dist'
+        'uglify:dist',
+        'concat:sass',
+        'sass:dist',
+        'clean:dist'
     ]);
 
     grunt.registerTask('docs', [

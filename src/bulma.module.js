@@ -6,7 +6,8 @@
         .module('bulma', [
             'bulma.modal',
             'bulma.progress',
-            'bulma.tabs'
+            'bulma.tabs',
+            'bulma.toast'
         ]);
 
 })();

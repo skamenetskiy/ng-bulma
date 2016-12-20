@@ -1,0 +1,49 @@
+<a name="toasts"></a>
+<div class="box">
+    <h1 class="title">Toaster</h1>
+    <div class="control">
+        <div class="message is-danger">
+            <div class="message-header">CSS</div>
+            <div class="message-body">This component requires additional css <code>ng-bulma/dist/bulma.css</code></div>
+        </div>
+    </div>
+    <div class="control">
+        <textarea class="textarea"
+                  title="Sample message"
+                  ng-model="vm.message"></textarea>
+    </div>
+    <div class="control">
+        <button class="button is-primary"
+                ng-click="vm.showToast('primary')">Show Toast
+        </button>
+        <button class="button is-info"
+                ng-click="vm.showToast('info')">Show Toast
+        </button>
+        <button class="button is-success"
+                ng-click="vm.showToast('success')">Show Toast
+        </button>
+        <button class="button is-warning"
+                ng-click="vm.showToast('warning')">Show Toast
+        </button>
+        <button class="button is-danger"
+                ng-click="vm.showToast('danger')">Show Toast
+        </button>
+        <button class="button is-primary"
+                ng-click="vm.showToast('primary', 5000)">Show and Hide in 5 sec
+        </button>
+    </div>
+    <div class="control">
+        <bulma-tabs>
+            <bulma-tab title="toasts.html">
+                <div hljs
+                     hljs-language="javascript"
+                     hljs-include="'js/app/toasts/toasts.html'"></div>
+            </bulma-tab>
+            <bulma-tab title="toasts.controller.js">
+                <div hljs
+                     hljs-language="javascript"
+                     hljs-include="'js/app/toasts/toasts.controller.js'"></div>
+            </bulma-tab>
+        </bulma-tabs>
+    </div>
+</div>

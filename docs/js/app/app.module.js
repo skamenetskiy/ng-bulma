@@ -9,15 +9,20 @@
 
             'app.modals',
             'app.progress',
-            'app.tabs'
+            'app.tabs',
+            'app.toasts'
         ])
         .config(config)
         .run(run);
 
-    config.$inject = ['hljsServiceProvider'];
+    config.$inject = [
+        'hljsServiceProvider'
+
+    ];
 
     /**
      * App config
+     * @param hljsServiceProvider
      */
     function config(hljsServiceProvider) {
         hljsServiceProvider.setOptions({
@@ -25,10 +30,16 @@
         });
     }
 
+    run.$inject = ['bulma'];
+
     /**
      * App run
+     * @param {Bulma} bulma
      */
-    function run() {
+    function run(bulma) {
+        bulma.configure('toast', {
+            position: 'rb'
+        });
     }
 
 })();
