@@ -26,13 +26,12 @@
         var style   = vm.toast.getOption('type');
         var timeout = vm.toast.getOption('timeout');
         vm.close    = close;
-
-        activate();
+        vm.$onInit  = $onInit;
 
         /**
          * Activate the controller
          */
-        function activate() {
+        function $onInit() {
             vm.inline    = vm.inline !== false;
             vm.showClose = vm.toast.getOption('closeButton');
             vm.contents  = $sce.trustAsHtml(vm.toast.getOption('contents'));

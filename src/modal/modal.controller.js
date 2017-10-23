@@ -27,12 +27,12 @@
         var vm    = this;
         var scope = $scope.$new(true, $scope);
 
-        activate();
+        vm.$onInit = $onInit;
 
         /**
          * activate
          */
-        function activate() {
+        function $onInit() {
             var controller = $controller(
                 vm.modal.getOption('controller'),
                 {
