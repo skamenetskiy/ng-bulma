@@ -5,7 +5,7 @@ module.exports = function (config) {
         files:         [
             'bower_components/angular/angular.js',
             'bower_components/angular-mocks/angular-mocks.js',
-            'dist/bulma.min.js',
+            'dist/ng-bulma.min.js',
             'src/**/*.spec.js'
         ],
         exclude:       [],

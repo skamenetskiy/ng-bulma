@@ -1,6 +1,6 @@
 {
   "name": "ng-bulma",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "AngularJs wrapper for bulma",
   "main": "dist/ng-bulma.js",
   "scripts": {
